@@ -11,7 +11,7 @@
   
 background-color: 
 rgba(254, 161, 78, 1);
-height: 100vh;
+/* height: 100vh; */
 border: 6px solid #FFFFFF;
 box-shadow: 30px 30px 40px -10px rgba(0, 0, 0, 0.15);
 border-radius: 18px;
@@ -24,7 +24,7 @@ backdrop-filter: blur(10px);
     align-items: center;
     padding: 0 5px;
 }
-.weather-inner-cont{
+.weather-inner-cont, .show-display{
  display: flex;
 flex-direction: column;
 align-items: center;
@@ -180,4 +180,6 @@ border-radius: 20px;
     display: flex;
     justify-content: center;
     display: none;
+    /* position: absolute; */
+    /* top: 20%; */
 }
