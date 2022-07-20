@@ -1,14 +1,11 @@
-
 // weather api
 // declarations
- let myKey = "c103953a288605d521acbc32ace7f35b";
- let btn = document.querySelector(".btn");
- let details = document.querySelector(".show-display");
- let inpt = document.querySelector(".search-input");
- let loader= document.querySelector(".loader");
- const error= document.querySelector(".error-msg");
-
-
+let myKey = "c103953a288605d521acbc32ace7f35b";
+let btn = document.querySelector(".btn");
+let details = document.querySelector(".show-display");
+let inpt = document.querySelector(".search-input");
+let loader = document.querySelector(".loader");
+const error = document.querySelector(".error-msg");
 
 let newDate = new Date();
 let currentDay = newDate.getDay();
@@ -16,59 +13,63 @@ let month = newDate.getMonth() + 1;
 let year = newDate.getFullYear();
 
 switch (currentDay) {
-    case 0:
-        day = "SUN";
-        break;
+  case 0:
+    day = "SUN";
+    break;
 
-    case 1:
-        day = "MON";
-        break;
-    case 2:
-        day = "TUES";
-        break;
-    case 3:
-        day = "WED";
-        break;
-    case 4:
-        day = "THURS";
-        break;
-    case 5:
-        day = "FRI";
-        break;
-    case 6:
-        day = "SAT";
-        break;
-
+  case 1:
+    day = "MON";
+    break;
+  case 2:
+    day = "TUES";
+    break;
+  case 3:
+    day = "WED";
+    break;
+  case 4:
+    day = "THURS";
+    break;
+  case 5:
+    day = "FRI";
+    break;
+  case 6:
+    day = "SAT";
+    break;
 }
-let dates =  `${day}/ ${month}/${year}`
- function viewApi() {
-    inpt.addEventListener("keyup", (e)=>{
-    inpt.innerHTML = "";
-        if (e.key == "Enter" && e.target.value) {
-            inptValue = e.target.value;
+let dates = `${day}/ ${month}/${year}`;
+inpt.addEventListener("keyup", (e) => {
+  if (e.key == "Enter" && e.target.value) {
+    inptValue = e.target.value;
 
-            // loader.style.display = "flex";
-            const countryName = inpt.value;
-            const api = `https://api.openweathermap.org/data/2.5/weather?q=${countryName}&appid=${myKey}`;
-            fetch(api)
-        .then((res)=>{
-            return res.json();
-        }).then((data)=>{
-            // loader.style.display = "none";
-            console.log(data);
-            if (data.weather === undefined) {
-               error.textContent = data.message;
-            }else{
-                error.textContent = ""
-                const icon = `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
-                
-            const temp = data.main.temp - 273.15;
-            let lat = data.coord.lat;
-            let long = data.coord.lon;
-            let rise = data.sys.sunset/20000000;
-            let set = data.sys.sunrise/200000;
-            // console.log(icon);
-            const display =`
+    viewApi();
+  }
+});
+function viewApi() {
+  inpt.innerHTML = "";
+
+  loader.style.display = "flex";
+  const countryName = inpt.value;
+  const api = `https://api.openweathermap.org/data/2.5/weather?q=${countryName}&appid=${myKey}`;
+  fetch(api)
+    .then((res) => {
+      return res.json();
+    })
+    .then((data) => {
+      loader.style.display = "none";
+      console.log(data);
+      if (data.weather === undefined) {
+        error.textContent = data.message;
+      } else {
+        error.textContent = "";
+        const icon = `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
+
+        const temp = data.main.temp - 273.15;
+        let lat = data.coord.lat;
+        let long = data.coord.lon;
+        let rise = data.sys.sunset / 20000000;
+        let set = data.sys.sunrise / 200000;
+        // console.log(icon);
+        const display = `
             
             <div class="Name-display">
            <h2 class="city-name">${data.name}</h2>
@@ -131,14 +132,13 @@ let dates =  `${day}/ ${month}/${year}`
                 <p class="temp">${Math.floor(rise)} &#8451;</p>
                 </button>
                 </div>
-            `
-            details.innerHTML = display;
-        }
-        })
-    }
-    })
- }
- viewApi();
+            `;
+        details.innerHTML = display;
+      }
+    });
+  // }
+}
+
 //  inpt.addEventListener("keyup", (e)=>{
-   
+
 //  })
