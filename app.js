@@ -1,5 +1,6 @@
 // weather api
 // declarations
+window.alert("search for a location")
 let myKey = "c103953a288605d521acbc32ace7f35b";
 let btn = document.querySelector(".btn");
 let details = document.querySelector(".show-display");
